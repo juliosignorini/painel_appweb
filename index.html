@@ -1,0 +1,324 @@
+Here is an improved and modernized version of the code based on the content you provided. I have restructured it using **HTML5**, **CSS (Bootstrap 5)** for a responsive layout, and added a section specifically for the **GESIN logo**.
+
+### Improvements made:
+*   **Modern Layout:** Used a dashboard-style design with cards for metrics and a clean header.
+*   **GESIN Branding:** Added the logo area and adjusted colors to match the GESIN identity (Green, Blue, Yellow).
+*   **Visual Filters:** Styled the environment (Ambientes) and status badges for better readability.
+*   **Progress Bar:** Added a visual progress bar with percentage indicators.
+*   **Empty State:** Added a clean "No actions found" message in the table.
+
+### How to use:
+1.  Save the code below as `index.html`.
+2.  Ensure your **GESIN logo image** is saved in the same folder as `logo-gesin.png` (or update the `src` in the code to point to your image file).
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel SUTEC – Atualização APPWEB1 | GESIN</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* GESIN Identity Colors based on Logo */
+            --gesin-blue: #1565C0;
+            --gesin-green: #2E7D32;
+            --gesin-yellow: #FBC02D;
+            --gesin-gray: #546E7A;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Header */
+        .top-header {
+            background-color: #ffffff;
+            border-bottom: 3px solid var(--gesin-green);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-height: 70px; /* Adjust based on your logo file */
+            margin-right: 15px;
+        }
+
+        .header-titles h1 {
+            font-size: 1.5rem;
+            color: var(--gesin-green);
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        .header-titles .subtitle {
+            font-size: 0.9rem;
+            color: var(--gesin-gray);
+            font-weight: 600;
+        }
+
+        /* Cards */
+        .stat-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Filters */
+        .filter-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .env-dot {
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .bg-env-dev { background-color: var(--gesin-blue); }
+        .bg-env-hom { background-color: #7E57C2; } /* Purple */
+        .bg-env-prod { background-color: var(--gesin-green); }
+        .bg-env-eval { background-color: var(--gesin-yellow); }
+
+        /* Progress Bar */
+        .progress-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .progress {
+            height: 25px;
+            border-radius: 15px;
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .table thead {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #adb5bd;
+        }
+        
+        .badge-status-ok { background-color: #28a745; }
+        .badge-status-progress { background-color: #17a2b8; }
+        .badge-status-pending { background-color: #ffc107; color: #333; }
+        .badge-status-start { background-color: #6c757d; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="top-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 d-flex align-items-center">
+                    <!-- LOGO AREA -->
+                    <!-- Replace src="logo-gesin.png" with the actual path to your logo image -->
+                    <img src="logo-gesin.png" alt="GESIN Logo" class="logo-img"> 
+                    <div>
+                        <div class="header-titles">
+                            <h1>GESIN</h1>
+                            <div class="subtitle">Gerência de Sistemas da Informação</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 text-md-end mt-2 mt-md-0">
+                    <h4 class="mb-1 fw-bold text-dark">Painel SUTEC · Atualização APPWEB1</h4>
+                    <span class="badge bg-secondary text-uppercase tracking-wide">Migração e Implantação de Sistemas no Novo Servidor</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        
+        <!-- Filter Section -->
+        <div class="filter-bar">
+            <div class="row g-3 align-items-center">
+                <div class="col-lg-5">
+                    <label class="form-label fw-bold text-secondary">Ambientes</label>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="envDev" checked>
+                            <label class="form-check-label" for="envDev"><span class="env-dot bg-env-dev"></span>Desenvolvimento</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="envHom" checked>
+                            <label class="form-check-label" for="envHom"><span class="env-dot bg-env-hom"></span>Homologação</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="envProd" checked>
+                            <label class="form-check-label" for="envProd"><span class="env-dot bg-env-prod"></span>Produção</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="envEval" checked>
+                            <label class="form-check-label" for="envEval"><span class="env-dot bg-env-eval"></span>Avaliação</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <label class="form-label fw-bold text-secondary">Status</label>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge badge-status-ok px-2 py-1">✅ OK</span>
+                        <span class="badge badge-status-progress px-2 py-1">🔄 Em Andamento</span>
+                        <span class="badge badge-status-pending px-2 py-1">⏳ Pendente</span>
+                        <span class="badge badge-status-start px-2 py-1"> Não Iniciado</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 text-end">
+                    <button class="btn btn-outline-danger mt-4" onclick="limparFiltros()">
+                        <i class="fas fa-times-circle me-1"></i> Limpar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="card stat-card bg-light p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-0">Total de Ações</h6>
+                            <h2 class="fw-bold mb-0 mt-1">0</h2>
+                        </div>
+                        <i class="fas fa-list-ol fa-2x text-secondary opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-success text-white p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-white-50 mb-0">Concluídas (OK)</h6>
+                            <h2 class="fw-bold mb-0 mt-1">0</h2>
+                        </div>
+                        <i class="fas fa-check-circle fa-2x text-white opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-primary text-white p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-white-50 mb-0">Em Andamento / Pendente</h6>
+                            <h2 class="fw-bold mb-0 mt-1">0</h2>
+                        </div>
+                        <i class="fas fa-spinner fa-2x text-white opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-secondary text-white p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-white-50 mb-0">Não Iniciadas</h6>
+                            <h2 class="fw-bold mb-0 mt-1">0</h2>
+                        </div>
+                        <i class="fas fa-pause-circle fa-2x text-white opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Progress -->
+        <div class="progress-container">
+            <div class="d-flex justify-content-between mb-2">
+                <h5 class="fw-bold mb-0">Progresso Geral do Projeto</h5>
+                <span class="fw-bold text-primary">Média Ponderada: 0%</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+            </div>
+            <div class="d-flex justify-content-between mt-2 text-muted small">
+                <span>0%</span>
+                <span>25%</span>
+                <span>50%</span>
+                <span>75%</span>
+                <span>100%</span>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="ps-4">Ação / Sistema <i class="fas fa-sort text-muted"></i></th>
+                            <th scope="col">Ambiente</th>
+                            <th scope="col">Progresso <i class="fas fa-sort text-muted"></i></th>
+                            <th scope="col">Início <i class="fas fa-sort text-muted"></i></th>
+                            <th scope="col">Fim <i class="fas fa-sort text-muted"></i></th>
+                            <th scope="col">Status <i class="fas fa-sort text-muted"></i></th>
+                            <th scope="col">Observação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="7">
+                                <div class="empty-state">
+                                    <i class="fas fa-search fa-3x mb-3"></i>
+                                    <h5 class="fw-bold">Nenhuma ação encontrada.</h5>
+                                    <p>Ajuste os filtros ou adicione novas tarefas ao painel.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="text-center mt-4 mb-4 text-muted small">
+            GESIN · Gerência de Sistemas da Informação | Painel SUTEC APPWEB1
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function limparFiltros() {
+            alert("Função de limpar filtros executada (placeholder)");
+            // Logic to reset checkboxes and table view would go here
+        }
+    </script>
+</body>
+</html>
+```
